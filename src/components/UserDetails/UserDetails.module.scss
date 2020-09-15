@@ -1,0 +1,22 @@
+.userDetailsTable {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  border-collapse: collapse;
+  margin: 2rem;
+  width: 854px;
+}
+
+.userDetailsTable td, th {
+  text-align: left;
+  padding: 10px;
+}
+
+.userDetailsTableTop th {
+  border-top: 0;
+  background-color: white;
+  font-size: 34px;
+  width: 380px;
+}
+
+.line {
+  border-right: solid 1px #e5e5e5;
+}
