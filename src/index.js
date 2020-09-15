@@ -6,20 +6,16 @@ import ReactDOM from 'react-dom';
 
 import Users from './components/UsersComponent/Users.component';
 
-//const apolloEndPoint = process.env.REACT_APP_GRAPHQL_ENDPOINT;
-const apolloApiKey = process.env.REACT_APP_GRAPHQL_API_KEY;
-const apolloEndPoint =
-  process.env.NODE_ENV === 'production'
-    ? 'https://dn6jtahorvekvabij3ziq3rsk4.appsync-api.us-east-1.amazonaws.com/graphql'
-    : process.env.REACT_APP_GRAPHQL_ENDPOINT;
+// process.env.REACT_APP_GRAPHQL_ENDPOINT
+// process.env.REACT_APP_GRAPHQL_API_KEY
 
-console.log(process.env);
 const client = new ApolloClient({
-  uri: apolloEndPoint,
+  uri:
+    'https://dn6jtahorvekvabij3ziq3rsk4.appsync-api.us-east-1.amazonaws.com/graphql',
   request: (operation) => {
     operation.setContext({
       headers: {
-        'x-api-key': apolloApiKey,
+        'x-api-key': 'da2-jfxhcmqg6jhgjjzdca2w2d5o7m',
       },
     });
   },
