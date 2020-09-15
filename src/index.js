@@ -2,7 +2,7 @@ import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import ApolloClient, { gql } from 'apollo-boost';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import env from './env';
+import env from './env.js';
 
 import Users from './components/UsersComponent/Users.component';
 
