@@ -6,6 +6,9 @@ import env from './env';
 
 import Users from './components/UsersComponent/Users.component';
 
+process.env.GRAPHQL_ENDPOINT = env.GRAPHQL_ENDPOINT;
+process.env.GRAPHQL_ENDPOINT = env.GRAPHQL_ENDPOINT;
+
 const client = new ApolloClient({
   uri: env.GRAPHQL_ENDPOINT,
   request: (operation) => {
