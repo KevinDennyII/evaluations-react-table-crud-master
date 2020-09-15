@@ -2,19 +2,24 @@ import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import ApolloClient, { gql } from 'apollo-boost';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import env from './env';
+//import env from '.env';
 
 import Users from './components/UsersComponent/Users.component';
 
-process.env.GRAPHQL_ENDPOINT = env.GRAPHQL_ENDPOINT;
-process.env.GRAPHQL_ENDPOINT = env.GRAPHQL_ENDPOINT;
+//const apolloEndPoint = process.env.REACT_APP_GRAPHQL_ENDPOINT;
+const apolloApiKey = process.env.REACT_APP_GRAPHQL_API_KEY;
+const apolloEndPoint =
+  process.env.NODE_ENV === 'production'
+    ? 'https://dn6jtahorvekvabij3ziq3rsk4.appsync-api.us-east-1.amazonaws.com/graphql'
+    : process.env.REACT_APP_GRAPHQL_ENDPOINT;
 
+console.log(process.env);
 const client = new ApolloClient({
-  uri: env.GRAPHQL_ENDPOINT,
+  uri: apolloEndPoint,
   request: (operation) => {
     operation.setContext({
       headers: {
-        'x-api-key': env.GRAPHQL_API_KEY,
+        'x-api-key': apolloApiKey,
       },
     });
   },

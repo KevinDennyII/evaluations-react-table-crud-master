@@ -6,7 +6,7 @@
 
 - The schema you have to work with is in the repo as `schema.graphql`.
 
-- You'll have to create an `env.js` file in the `src` directory with the content:
+- You'll have to create an `.env` file in the `src` directory with the content:
 
 ```js
 export default {
@@ -15,7 +15,7 @@ export default {
 };
 ```
 
-- Fill in the endpoint and API key you received in the `env.js` file.
+- Fill in the endpoint and API key you received in the `.env` file.
 
 - You should have also received a link to Zeplin containing the design you have to implement.
 
