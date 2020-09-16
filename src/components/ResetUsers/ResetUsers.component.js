@@ -1,9 +1,9 @@
 import React from 'react';
-import { editTip } from './ResetUsers.module.scss';
+import { resetNotice } from './ResetUsers.module.scss';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-const ResetUsers = () => {
+const ResetUsers = ({ refreshData }) => {
   // GraphQL mutation for updating a user
   const RESET_USERS_QUERY = gql`
     mutation ResetUsers {
@@ -12,8 +12,9 @@ const ResetUsers = () => {
   `;
   const [resetUsers] = useMutation(RESET_USERS_QUERY);
 
-  const reset = () => {
-    return resetUsers().then((r) => console.log(r));
+  const reset = (e) => {
+    e.preventDefault();
+    return resetUsers().then(() => refreshData());
   };
 
   return (
@@ -22,8 +23,8 @@ const ResetUsers = () => {
         Reset Users
       </button>
       <br />
-      <span className={editTip}>
-        * To edit a user please click on the user's email address
+      <span className={resetNotice}>
+        * Allow a couple seconds for data to be reset
       </span>
     </form>
   );

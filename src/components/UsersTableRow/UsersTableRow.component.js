@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { showActiveForEdit } from './UsersTableRow.module.scss';
 
 const UsersTableRow = ({ userSelected, user, handleSelect }) => {
@@ -13,8 +14,10 @@ const UsersTableRow = ({ userSelected, user, handleSelect }) => {
           style={{ margin: '15px' }}
         />
       </td>
-      <td id={email} onClick={userSelected} className={showActiveForEdit}>
-        {email}
+      <td className={showActiveForEdit}>
+        <Link id={email} to="/user-details" onClick={userSelected}>
+          {email}
+        </Link>
       </td>
       <td>{name}</td>
       <td>{role}</td>

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
+  line,
   userDetailsTable,
   userDetailsTableTop,
-  line,
 } from './UserDetails.module.scss';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-const UserDetails = ({ user }) => {
+const UserDetails = ({ user, refreshData }) => {
   // grabbing state of role to capture current role or submit a change in the role
   // grabbing state of name to capture current name or submit a change in the name
   const [role, setRole] = useState(user.role);
@@ -33,16 +34,43 @@ const UserDetails = ({ user }) => {
       }
     }
   `;
-  const [updateUser] = useMutation(UPDATE_USER_QUERY);
+  const [updateUser, { error, data }] = useMutation(UPDATE_USER_QUERY);
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     return updateUser({
       variables: { email: user.email, name: name, role: role },
-    }).then((r) => console.log(r));
+    }).then(() => refreshData());
+  };
+
+  // we want to let the user know there data was save since we are not automatically going back to
+  // to a refreshed user page
+  const successMessage = (er, dat) => {
+    if (er) {
+      return (
+        <div>
+          Uh oh! There's trouble in paradise...
+          <br />
+          Error details: {er}
+        </div>
+      );
+    }
+    if (dat) {
+      return (
+        <div>
+          Data saved Successfully!
+          <br />
+          <strong>Name</strong>: {dat.updateUser.name}
+          <br />
+          <strong>Role</strong>: {dat.updateUser.role}
+        </div>
+      );
+    }
   };
 
   return (
     <form onSubmit={onSubmit}>
+      <Link to="/">Back to Users</Link>
       <table className={userDetailsTable}>
         <thead>
           <tr className={userDetailsTableTop}>
@@ -115,6 +143,7 @@ const UserDetails = ({ user }) => {
           </tr>
         </tbody>
       </table>
+      {successMessage(error, data)}
     </form>
   );
 };

@@ -1,10 +1,11 @@
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import ApolloClient, { gql } from 'apollo-boost';
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 //import env from '.env';
-
 import Users from './components/UsersComponent/Users.component';
+import UserDetails from './components/UserDetails/UserDetails.component';
 
 // process.env.REACT_APP_GRAPHQL_ENDPOINT
 // process.env.REACT_APP_GRAPHQL_API_KEY
@@ -32,7 +33,9 @@ const ALL_USERS_QUERY = gql`
 `;
 
 const App = () => {
-  const { loading, error, data } = useQuery(ALL_USERS_QUERY);
+  const [editThisUser, setEditThisUser] = useState({});
+
+  const { loading, error, data, refetch } = useQuery(ALL_USERS_QUERY);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -44,14 +47,46 @@ const App = () => {
 
   return (
     <div>
-      <Users users={data.allUsers} />
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <Users
+              {...props}
+              refreshData={refetch}
+              users={data.allUsers}
+              setEditThisUser={setEditThisUser}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/users"
+          render={(props) => (
+            <Users
+              {...props}
+              users={data.allUsers}
+              setEditThisUser={setEditThisUser}
+            />
+          )}
+        />
+        <Route
+          path="/user-details"
+          render={(props) => (
+            <UserDetails {...props} user={editThisUser} refreshData={refetch} />
+          )}
+        />
+      </Switch>
     </div>
   );
 };
 
 const Root = () => (
   <ApolloProvider client={client}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </ApolloProvider>
 );
 

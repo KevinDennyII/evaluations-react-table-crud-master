@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import UsersTableRow from '../UsersTableRow/UsersTableRow.component';
-import UserDetails from '../UserDetails/UserDetails.component';
 import ResetUsers from '../ResetUsers/ResetUsers.component';
-import { userTable, userTableTop, userHeaderRow } from './Users.module.scss';
+import {
+  userTable,
+  userTableTop,
+  userHeaderRow,
+  editTip,
+} from './Users.module.scss';
 
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
-const Users = ({ users }) => {
+const Users = ({ users, setEditThisUser, refreshData }) => {
   const [selected, setSelected] = useState({});
-  const [editThisUser, setEditThisUser] = useState(users[0]);
   const [disableBtnValue, setDisableBtnValue] = useState(true);
 
   // capture all users that have been selected for deletion
@@ -46,28 +49,33 @@ const Users = ({ users }) => {
     // grab selected users for delete
     let deleteTheseUsers = [];
     Object.entries(selected).map((selectedUser) => {
+      // if a users flag is true
       if (selectedUser[1]) {
         deleteTheseUsers = [...deleteTheseUsers, selectedUser[0]];
       }
+      setSelected({}); //reset selected list to empty
       return deleteTheseUsers;
     });
 
     // execute GraphQL mutation
     return deleteUsers({
       variables: { emails: deleteTheseUsers },
-    }).then((r) => console.log(r));
+    }).then(() => refreshData());
   };
 
   return (
     <div>
-      <ResetUsers />
+      <ResetUsers refreshData={refreshData} />
       <form onSubmit={onDelete}>
         <table className={userTable}>
           <thead>
             <tr className={userTableTop}>
               <th>Users</th>
-              <th />
-              <th />
+              <th colSpan="2">
+                <span className={editTip}>
+                  * To edit a user please click on the user's email address
+                </span>
+              </th>
               <th>
                 <button
                   type="submit"
@@ -101,7 +109,6 @@ const Users = ({ users }) => {
           </tbody>
         </table>
       </form>
-      <UserDetails user={editThisUser} />
     </div>
   );
 };
