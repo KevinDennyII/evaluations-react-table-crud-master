@@ -4,7 +4,7 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
 const ResetUsers = ({ refreshData }) => {
-  // GraphQL mutation for updating a user
+  // GraphQL mutation for resetting api data to default
   const RESET_USERS_QUERY = gql`
     mutation ResetUsers {
       resetUsers

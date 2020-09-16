@@ -21,7 +21,7 @@ const Users = ({ users, setEditThisUser, refreshData }) => {
     selected[e.target.name] = e.target.checked;
     setSelected(selected);
 
-    // saving flag for disable attribute of button
+    // saving flag for disable attribute of delete button
     let val = Object.values(selected).every(isSelected);
     setDisableBtnValue(val);
   };

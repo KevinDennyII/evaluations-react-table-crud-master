@@ -9,7 +9,6 @@ import UserDetails from './components/UserDetails/UserDetails.component';
 
 // process.env.REACT_APP_GRAPHQL_ENDPOINT
 // process.env.REACT_APP_GRAPHQL_API_KEY
-
 const client = new ApolloClient({
   uri:
     'https://dn6jtahorvekvabij3ziq3rsk4.appsync-api.us-east-1.amazonaws.com/graphql',
@@ -33,8 +32,13 @@ const ALL_USERS_QUERY = gql`
 `;
 
 const App = () => {
+  // saving user to be edited in the parent component so it can be passed
+  // back down to a child this is passed from the User component up to the root
+  // and then back down to the UserDetails component
   const [editThisUser, setEditThisUser] = useState({});
 
+  // using refetch to pass down to all components so that the UPDATE api data can be loaded on the page
+  // after an update to the api has been made
   const { loading, error, data, refetch } = useQuery(ALL_USERS_QUERY);
 
   if (loading) {
@@ -66,6 +70,7 @@ const App = () => {
           render={(props) => (
             <Users
               {...props}
+              refreshData={refetch}
               users={data.allUsers}
               setEditThisUser={setEditThisUser}
             />

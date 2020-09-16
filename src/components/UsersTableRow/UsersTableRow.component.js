@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { showActiveForEdit } from './UsersTableRow.module.scss';
 
 const UsersTableRow = ({ userSelected, user, handleSelect }) => {
+  // setting up a default to avoid undefined error if the user object hsa no data
   const { email = '', name = '', role = '' } = user;
   return (
     <tr>
