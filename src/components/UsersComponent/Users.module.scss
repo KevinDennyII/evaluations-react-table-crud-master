@@ -41,10 +41,16 @@ th {
   font-style: normal;
   letter-spacing: 0.14px;
   color: #ee0000;
+  background-color: #ffffff;
   font-size: 13px;
   width: 76px;
   height: 28px;
   border-radius: 4px;
   border: solid 1px #ee0000;
   cursor: pointer;
+}
+
+.deleteBtn:disabled{
+  color: #D3D3D3;
+  border: solid 1px #D3D3D3;
 }
