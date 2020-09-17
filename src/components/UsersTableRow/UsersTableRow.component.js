@@ -5,13 +5,13 @@ import { showActiveForEdit } from './UsersTableRow.module.scss';
 const UsersTableRow = ({ userSelected, user, handleSelect }) => {
   // setting up a default to avoid undefined error if the user object hsa no data
 
-  // const printRoleName = (role) => {
-  //   if (Object.is(role, 'DEVELOPER')) return 'Developer';
-  //   if (Object.is(role, 'APP_MANAGER')) return 'App Manager';
-  //   if (Object.is(role, 'SALES')) return 'Sales';
-  //   if (Object.is(role, 'MARKETING')) return 'Marketing';
-  //   if (Object.is(role, 'ADMIN')) return 'Admin';
-  // };
+  const printRoleName = (role) => {
+    if (Object.is(role, 'DEVELOPER')) return 'Developer';
+    if (Object.is(role, 'APP_MANAGER')) return 'App Manager';
+    if (Object.is(role, 'SALES')) return 'Sales';
+    if (Object.is(role, 'MARKETING')) return 'Marketing';
+    if (Object.is(role, 'ADMIN')) return 'Admin';
+  };
 
   const { email = '', name = '', role = '' } = user;
   return (
@@ -30,7 +30,7 @@ const UsersTableRow = ({ userSelected, user, handleSelect }) => {
         </Link>
       </td>
       <td>{name}</td>
-      <td>{role}</td>
+      <td>{printRoleName(role)}</td>
     </tr>
   );
 };
