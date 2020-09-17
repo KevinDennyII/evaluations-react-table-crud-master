@@ -4,6 +4,7 @@ import {
   line,
   userDetailsTable,
   userDetailsTableTop,
+  saveBtn,
 } from './UserDetails.module.scss';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
@@ -76,7 +77,11 @@ const UserDetails = ({ user, refreshData }) => {
           <tr className={userDetailsTableTop}>
             <th>{user.email}</th>
             <th>
-              <button type="submit" style={{ float: 'right' }}>
+              <button
+                className={saveBtn}
+                type="submit"
+                style={{ float: 'right' }}
+              >
                 Save
               </button>
             </th>

@@ -6,6 +6,7 @@ import {
   userTableTop,
   userHeaderRow,
   editTip,
+  deleteBtn,
 } from './Users.module.scss';
 
 import { gql } from 'apollo-boost';
@@ -79,6 +80,7 @@ const Users = ({ users, setEditThisUser, refreshData }) => {
               <th>
                 <button
                   type="submit"
+                  className={deleteBtn}
                   style={{ float: 'right' }}
                   disabled={disableBtnValue}
                 >

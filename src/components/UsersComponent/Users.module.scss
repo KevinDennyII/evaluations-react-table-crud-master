@@ -33,3 +33,18 @@ th {
   font-style: italic;
   background-color: linen;
 }
+
+.deleteBtn {
+  font-family: SFProText, serif;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: 0.14px;
+  color: #ee0000;
+  font-size: 13px;
+  width: 76px;
+  height: 28px;
+  border-radius: 4px;
+  border: solid 1px #ee0000;
+  cursor: pointer;
+}
