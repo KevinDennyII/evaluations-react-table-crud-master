@@ -1,3 +1,5 @@
+https://inspiring-mestorf-e2e4f4.netlify.app
+
 # React Table CRUD evaluation
 
 - Fork this repository and build your solution in the fork. When you're done reach out to us with the link to your solution repository.
