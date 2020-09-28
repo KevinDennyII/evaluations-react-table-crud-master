@@ -1,0 +1,13 @@
+The Assessment had Style and Functionality issues:
+
+Style:
+Uses tables for layout which is outdated
+Right font for rows, wrong font for buttons
+Not responsive
+Hover style on all the time for the rows
+
+Functionality:
+Entire email field shows cursor pointer, but only the email is clickable 
+Edit functionality doesn't navigate back
+Only the root URL works; others do not
+Navigating to the edit page just loads /user-details without any URL param to identify the user, and keeps the state of which user it is locally, so if you reload the page, it breaks
