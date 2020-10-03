@@ -37,6 +37,23 @@ const Users = ({ users, setEditThisUser, refreshData }) => {
     setEditThisUser(result);
   };
 
+  // GraphQL query for user
+  // const USER_QUERY = gql`
+  //   query User($email: ID!) {
+  //     user(email: $email) {
+  //       email
+  //       name
+  //       role
+  //     }
+  //   }
+  // `;
+  //
+  // const [user] = useQuery(USER_QUERY);
+  //
+  // user({
+  //   variables: { email:  user.email},
+  // }).then(() => refreshData());
+
   // GraphQL mutation for updating a user
   const DELETE_USERS_QUERY = gql`
     mutation DeleteUsers($emails: [ID]!) {

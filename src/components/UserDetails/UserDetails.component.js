@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   line,
@@ -7,13 +7,46 @@ import {
   saveBtn,
 } from './UserDetails.module.scss';
 import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
-const UserDetails = ({ user, refreshData }) => {
-  // grabbing state of role to capture current role or submit a change in the role
-  // grabbing state of name to capture current name or submit a change in the name
+const UserDetails = ({ location, history, match, user, refreshData }) => {
+  console.log(match);
+  console.log(user);
+
+  // GraphQL query for user
+  const USER_QUERY = gql`
+    query User($email: ID!) {
+      user(email: $email) {
+        email
+        name
+        role
+      }
+    }
+  `;
+
+  // grabbing param Id for querying user
+  const { data } = useQuery(USER_QUERY, {
+    variables: { email: match.params.emailId },
+  });
+
+  console.log(data);
+
   const [role, setRole] = useState(user.role);
   const [name, setName] = useState(user.name);
+
+  // const [role, setRole] = useState(data.user.role);
+  // const [name, setName] = useState(data.user.name);
+
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
+  //
+  // if (error) {
+  //   return <p>Error: {JSON.stringify(error)}</p>;
+  // }
+
+  // grabbing state of role to capture current role or submit a change in the role
+  // grabbing state of name to capture current name or submit a change in the name
 
   // capturing selected role
   const onChangeValueRoles = (e) => {
@@ -35,7 +68,7 @@ const UserDetails = ({ user, refreshData }) => {
       }
     }
   `;
-  const [updateUser, { error, data }] = useMutation(UPDATE_USER_QUERY);
+  const [updateUser] = useMutation(UPDATE_USER_QUERY);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -46,28 +79,28 @@ const UserDetails = ({ user, refreshData }) => {
 
   // we want to let the user know there data was save since we are not automatically going back to
   // to a refreshed user page
-  const successMessage = (er, dat) => {
-    if (er) {
-      return (
-        <div>
-          Uh oh! There's trouble in paradise...
-          <br />
-          Error details: {er}
-        </div>
-      );
-    }
-    if (dat) {
-      return (
-        <div>
-          Data saved Successfully!
-          <br />
-          <strong>Name</strong>: {dat.updateUser.name}
-          <br />
-          <strong>Role</strong>: {dat.updateUser.role}
-        </div>
-      );
-    }
-  };
+  // const successMessage = (er, dat) => {
+  //   if (er) {
+  //     return (
+  //       <div>
+  //         Uh oh! There's trouble in paradise...
+  //         <br />
+  //         Error details: {er}
+  //       </div>
+  //     );
+  //   }
+  //   if (dat) {
+  //     return (
+  //       <div>
+  //         Data saved Successfully!
+  //         <br />
+  //         <strong>Name</strong>: {dat.updateUser.name}
+  //         <br />
+  //         <strong>Role</strong>: {dat.updateUser.role}
+  //       </div>
+  //     );
+  //   }
+  // };
 
   return (
     <form onSubmit={onSubmit}>
@@ -148,7 +181,7 @@ const UserDetails = ({ user, refreshData }) => {
           </tr>
         </tbody>
       </table>
-      {successMessage(error, data)}
+      {/*{successMessage(error, data)}*/}
     </form>
   );
 };

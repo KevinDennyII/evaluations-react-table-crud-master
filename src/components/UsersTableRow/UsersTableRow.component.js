@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { showActiveForEdit } from './UsersTableRow.module.scss';
+import { showActiveForEdit, rectangle } from './UsersTableRow.module.scss';
 
 const UsersTableRow = ({ userSelected, user, handleSelect }) => {
   // setting up a default to avoid undefined error if the user object hsa no data
@@ -14,8 +14,9 @@ const UsersTableRow = ({ userSelected, user, handleSelect }) => {
   };
 
   const { email = '', name = '', role = '' } = user;
+
   return (
-    <tr>
+    <tr className={rectangle}>
       <td style={{ width: '4px' }}>
         <input
           name={email}
@@ -24,8 +25,13 @@ const UsersTableRow = ({ userSelected, user, handleSelect }) => {
           style={{ margin: '15px' }}
         />
       </td>
-      <td className={showActiveForEdit}>
-        <Link id={email} to="/user-details" onClick={userSelected}>
+      <td>
+        <Link
+          className={showActiveForEdit}
+          id={email}
+          to={`/user-details/${email}`}
+          onClick={userSelected}
+        >
           {email}
         </Link>
       </td>
