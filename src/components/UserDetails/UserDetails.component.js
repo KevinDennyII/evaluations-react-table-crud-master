@@ -10,8 +10,9 @@ import { gql } from 'apollo-boost';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 const UserDetails = ({ location, history, match, user, refreshData }) => {
-  console.log(match);
-  console.log(user);
+  const [role, setRole] = useState(user.role);
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
 
   // GraphQL query for user
   const USER_QUERY = gql`
@@ -29,24 +30,13 @@ const UserDetails = ({ location, history, match, user, refreshData }) => {
     variables: { email: match.params.emailId },
   });
 
-  console.log(data);
-
-  const [role, setRole] = useState(user.role);
-  const [name, setName] = useState(user.name);
-
-  // const [role, setRole] = useState(data.user.role);
-  // const [name, setName] = useState(data.user.name);
-
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
-  //
-  // if (error) {
-  //   return <p>Error: {JSON.stringify(error)}</p>;
-  // }
-
-  // grabbing state of role to capture current role or submit a change in the role
-  // grabbing state of name to capture current name or submit a change in the name
+  useEffect(() => {
+    if (data) {
+      setRole(data.user.role);
+      setName(data.user.name);
+      setEmail(data.user.email);
+    }
+  }, [data]);
 
   // capturing selected role
   const onChangeValueRoles = (e) => {
@@ -72,14 +62,15 @@ const UserDetails = ({ location, history, match, user, refreshData }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     return updateUser({
-      variables: { email: user.email, name: name, role: role },
+      variables: { email, name, role },
     }).then(() => refreshData());
   };
 
   // we want to let the user know there data was save since we are not automatically going back to
   // to a refreshed user page
-  // const successMessage = (er, dat) => {
+  // const successMessage = (er) => {
   //   if (er) {
   //     return (
   //       <div>
@@ -88,15 +79,14 @@ const UserDetails = ({ location, history, match, user, refreshData }) => {
   //         Error details: {er}
   //       </div>
   //     );
-  //   }
-  //   if (dat) {
+  //   } else {
   //     return (
   //       <div>
   //         Data saved Successfully!
   //         <br />
-  //         <strong>Name</strong>: {dat.updateUser.name}
+  //         <strong>Name</strong>: {updateUser.name}
   //         <br />
-  //         <strong>Role</strong>: {dat.updateUser.role}
+  //         <strong>Role</strong>: {updateUser.role}
   //       </div>
   //     );
   //   }
@@ -108,7 +98,7 @@ const UserDetails = ({ location, history, match, user, refreshData }) => {
       <table className={userDetailsTable}>
         <thead>
           <tr className={userDetailsTableTop}>
-            <th>{user.email}</th>
+            <th>{email}</th>
             <th>
               <button
                 className={saveBtn}
@@ -181,7 +171,7 @@ const UserDetails = ({ location, history, match, user, refreshData }) => {
           </tr>
         </tbody>
       </table>
-      {/*{successMessage(error, data)}*/}
+      {/*{successMessage(error)}*/}
     </form>
   );
 };
