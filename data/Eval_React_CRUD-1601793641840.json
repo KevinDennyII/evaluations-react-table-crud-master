@@ -1,0 +1,61 @@
+{
+	"data": {
+		"allUsers": [
+			{
+				"email": "joe@ourbranch.com",
+				"name": "Joe Emison",
+				"role": "MARKETING"
+			},
+			{
+				"email": "tati@ourbranch.com",
+				"name": "Tatiana Mesa",
+				"role": "APP_MANAGER"
+			},
+			{
+				"email": "kelly@ourbranch.com",
+				"name": "Kelly Fogarty",
+				"role": "SALES"
+			},
+			{
+				"email": "charlie@ourbranch.com",
+				"name": "Charlie Wendland",
+				"role": "MARKETING"
+			},
+			{
+				"email": "jason@ourbranch.com",
+				"name": "Jason Brown",
+				"role": "DEVELOPER"
+			},
+			{
+				"email": "mathias@ourbranch.com",
+				"name": "Mathias Rabellino",
+				"role": "MARKETING"
+			},
+			{
+				"email": "victoria@ourbranch.com",
+				"name": "Victoria Lavella",
+				"role": "DEVELOPER"
+			},
+			{
+				"email": "dan@ourbranch.com",
+				"name": "Dan Spiegel",
+				"role": "APP_MANAGER"
+			},
+			{
+				"email": "steve@ourbranch.com",
+				"name": "Steve Lekas",
+				"role": "APP_MANAGER"
+			},
+			{
+				"email": "sebas@ourbranch.com",
+				"name": "Sebastian Rodriguez",
+				"role": "ADMIN"
+			},
+			{
+				"email": "adithya@ourbranch.com",
+				"name": "Adithya Reddy",
+				"role": "DEVELOPER"
+			}
+		]
+	}
+}

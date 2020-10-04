@@ -11,8 +11,6 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 
 const UserDetails = ({ location, history, match, user, refreshData }) => {
   // when the page is refreshed the user object is empty so defaults are needed to be set
-  const { role = '', name = '', email = '' } = user;
-
   const [userRole, setUserRole] = useState(user.role || '');
   const [userName, setUserName] = useState(user.name || '');
   const [userEmail, setUserEmail] = useState(user.email || '');
@@ -65,9 +63,8 @@ const UserDetails = ({ location, history, match, user, refreshData }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     return updateUser({
-      variables: { email, name, role },
+      variables: { email: userEmail, name: userName, role: userRole },
     }).then(() => refreshData());
   };
 
