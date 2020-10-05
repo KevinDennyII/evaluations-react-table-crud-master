@@ -33,6 +33,7 @@ const UserDetails = ({ location, history, match, user, refreshData }) => {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setUserRole(data.user.role);
       setUserName(data.user.name);
       setUserEmail(data.user.email);

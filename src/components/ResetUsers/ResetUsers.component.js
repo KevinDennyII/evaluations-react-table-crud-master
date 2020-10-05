@@ -25,6 +25,7 @@ const ResetUsers = ({ refreshData }) => {
       <br />
       <span className={resetNotice}>
         * Allow a couple seconds for data to be reset
+        <br />* To edit a user click on the email address
       </span>
     </form>
   );
