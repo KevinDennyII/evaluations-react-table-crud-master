@@ -1,4 +1,27 @@
+.rectangle:hover {
+  background-color: #fafafa;
+}
 .showActiveForEdit:hover {
   color: #0070c9;
   cursor: pointer;
+}
+
+.selectUserToDelete {
+  margin: 0 15px;
+}
+
+@media (max-width: 600px) {
+  .userRole {
+    margin-top: -10px;
+    font-style: italic;
+    order: 1;
+  }
+
+  .userName {
+    order: 2;
+  }
+
+  .selectUserToDelete {
+    margin: 0
+  }
 }

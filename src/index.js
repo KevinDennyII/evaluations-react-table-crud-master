@@ -19,6 +19,7 @@ const client = new ApolloClient({
       },
     });
   },
+  connectToDevTools: true,
 });
 
 const ALL_USERS_QUERY = gql`
@@ -77,7 +78,8 @@ const App = () => {
           )}
         />
         <Route
-          path="/user-details"
+          //path="/user-details"
+          path="/user-details/:emailId"
           render={(props) => (
             <UserDetails {...props} user={editThisUser} refreshData={refetch} />
           )}

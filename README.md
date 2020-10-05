@@ -1,6 +1,9 @@
 https://inspiring-mestorf-e2e4f4.netlify.app
 
-# React Table CRUD evaluation
+### Interview Exercise on CRUD tables
+A completed exercise on CRUD tables with ReactJS.  I was originally given the front-end specs of this as well but the CSS modules I provide is sufficient.
+
+#### React Table CRUD evaluation
 
 - Fork this repository and build your solution in the fork. When you're done reach out to us with the link to your solution repository.
 
@@ -25,7 +28,7 @@ export default {
 
 - There's a `resetUsers` mutation that you can use at any time to restore the original user data set.
 
-## Guidelines
+#### Guidelines
 
 - **It doesn't have to be perfect -- it's completely fine to have rough edges with the styling or the functionality.**
 
@@ -43,7 +46,7 @@ export default {
 
 - You'll have to implement the two screens in the Zeplin design as separate routes, using client side routing.
 
-## What we'll be evaluating you on
+#### What we'll be evaluating you on
 
 - General React knowledge (state and props, lifecycles methods / hooks, event handling, conditional rendering, lists and keys, etc.)
 - How consistent your coding style is.

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import UsersTableRow from '../UsersTableRow/UsersTableRow.component';
 import ResetUsers from '../ResetUsers/ResetUsers.component';
 import {
-  userTable,
-  userTableTop,
   userHeaderRow,
-  editTip,
+  userGrid,
+  userGridTitle,
+  userTableTitle,
   deleteBtn,
 } from './Users.module.scss';
 
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
+import UsersTableRow from '../UsersTableRow/UsersTableRow.component';
 
 const Users = ({ users, setEditThisUser, refreshData }) => {
   const [selected, setSelected] = useState({});
@@ -68,48 +68,38 @@ const Users = ({ users, setEditThisUser, refreshData }) => {
     <div>
       <ResetUsers refreshData={refreshData} />
       <form onSubmit={onDelete}>
-        <table className={userTable}>
-          <thead>
-            <tr className={userTableTop}>
-              <th>Users</th>
-              <th colSpan="2">
-                <span className={editTip}>
-                  * To edit a user please click on the user's email address
-                </span>
-              </th>
-              <th>
-                <button
-                  type="submit"
-                  className={deleteBtn}
-                  style={{ float: 'right' }}
-                  disabled={disableBtnValue}
-                >
-                  Delete
-                </button>
-              </th>
-            </tr>
-            <tr className={userHeaderRow}>
-              <th />
-              <th>EMAIL</th>
-              <th>NAME</th>
-              <th>ROLE</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* mapping of user */}
-            {users.map((user) => {
-              return (
-                <UsersTableRow
-                  key={user.email}
-                  userSelected={userSelectedForEditing}
-                  user={user}
-                  selected={selected[user.email]}
-                  handleSelect={handleSelectedUsersForDelete}
-                />
-              );
-            })}
-          </tbody>
-        </table>
+        <div style={{ padding: '3rem' }}>
+          <div className={userGridTitle}>
+            <div className={userTableTitle}>Users</div>
+            <div>
+              <button
+                type="submit"
+                className={deleteBtn}
+                style={{ float: 'right' }}
+                disabled={disableBtnValue}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+          <div className={`${userGrid} ${userHeaderRow}`}>
+            <label> </label>
+            <label>Email</label>
+            <label>Name</label>
+            <label>Role</label>
+          </div>
+          {users.map((user) => {
+            return (
+              <UsersTableRow
+                key={user.email}
+                userSelected={userSelectedForEditing}
+                user={user}
+                selected={selected[user.email]}
+                handleSelect={handleSelectedUsersForDelete}
+              />
+            );
+          })}
+        </div>
       </form>
     </div>
   );

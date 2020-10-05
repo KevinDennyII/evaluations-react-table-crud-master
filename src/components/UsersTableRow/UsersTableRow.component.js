@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { showActiveForEdit } from './UsersTableRow.module.scss';
+import {
+  showActiveForEdit,
+  rectangle,
+  userRole,
+  userName,
+  selectUserToDelete,
+} from './UsersTableRow.module.scss';
+import { userGrid } from '../UsersComponent/Users.module.scss';
 
-const UsersTableRow = ({ userSelected, user, handleSelect }) => {
-  // setting up a default to avoid undefined error if the user object hsa no data
+const UsersTableGridRow = ({ userSelected, user, handleSelect }) => {
+  const { email = '', name = '', role = '' } = user;
 
   const printRoleName = (role) => {
     if (Object.is(role, 'DEVELOPER')) return 'Developer';
@@ -12,27 +19,30 @@ const UsersTableRow = ({ userSelected, user, handleSelect }) => {
     if (Object.is(role, 'MARKETING')) return 'Marketing';
     if (Object.is(role, 'ADMIN')) return 'Admin';
   };
-
-  const { email = '', name = '', role = '' } = user;
   return (
-    <tr>
-      <td style={{ width: '4px' }}>
+    <div className={`${userGrid} ${rectangle}`}>
+      <div>
         <input
           name={email}
           type="checkbox"
           onChange={handleSelect}
-          style={{ margin: '15px' }}
+          className={selectUserToDelete}
         />
-      </td>
-      <td className={showActiveForEdit}>
-        <Link id={email} to="/user-details" onClick={userSelected}>
+      </div>
+      <div>
+        <Link
+          className={showActiveForEdit}
+          id={email}
+          to={`/user-details/${email}`}
+          onClick={userSelected}
+        >
           {email}
         </Link>
-      </td>
-      <td>{name}</td>
-      <td>{printRoleName(role)}</td>
-    </tr>
+      </div>
+      <div className={userRole}>{name}</div>
+      <div className={userName}>{printRoleName(role)}</div>
+    </div>
   );
 };
 
-export default UsersTableRow;
+export default UsersTableGridRow;
